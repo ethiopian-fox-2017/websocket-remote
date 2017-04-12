@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="carousel carousel-slider">
+      <a class="carousel-item" href="#four!"><img src="http://www.cbi.org.uk/cbi-prod/cache/file/02B005B3-5800-45C6-B03EAAFB34E1E739_1xthumb-2x1.jpg"></a>
+      <a class="carousel-item" href="#one!"><img src="http://images.adsttc.com/media/images/5865/2834/e58e/ce52/2a00/0049/large_jpg/Beipanjiang.jpg?1483024428"></a>
+      <a class="carousel-item" href="#two!"><img src="http://www.classicholidays.com.au/wp-content/uploads/2017/03/07.-Tasmania-Golf-Club.jpg"></a>
+      <a class="carousel-item" href="#three!"><img src="http://www.projectbaikal.com/public/journals/1/cover_article_573_en_US.jpg"></a>
+    </div>
+    <br>
+    <center>
+      <a class="btn-floating btn-large waves-effect waves-light red kiri"><i class="material-icons">fast_rewind</i></a>
+      <a class="btn-floating btn-large waves-effect waves-light green kanan"><i class="material-icons">fast_forward</i></a>
+    </center>
+  </body>
+
+  <script>
+       $('.carousel.carousel-slider').carousel({fullWidth: true});
+
+       //INITIALIZING FIREBASE CONNECTION
+       var config = {
+        apiKey: "AIzaSyA0ryE-5ikwGZsB5JWPxAuJ-F9-I1RhALY",
+        authDomain: "smartphone-remote-presentation.firebaseapp.com",
+        databaseURL: "https://smartphone-remote-presentation.firebaseio.com",
+        projectId: "smartphone-remote-presentation",
+        storageBucket: "smartphone-remote-presentation.appspot.com",
+        messagingSenderId: "809345945986"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      function writeUserData(direction) {
+        firebase.database().ref('carousel/slide').set({
+          command: direction,
+          timestamp: new Date().getTime().toString()
+        });
+      }
+
+      writeUserData(null) //Initializing the value of Command field in Firebase to null
+
+      $(".kiri").on("click",function(){
+        $('.carousel').carousel('prev');
+        writeUserData('prev')
+        console.log("swap left");
+      });
+
+      $(".kanan").on("click",function(){
+        $('.carousel').carousel('next');
+        writeUserData('next')
+        console.log("swap right");
+      });
+  </script>
+</html>
