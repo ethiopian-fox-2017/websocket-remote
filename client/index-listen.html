@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Web Socket Slide Presentation</title>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  </head>
+  <body>
+
+    <div class="w3-content" style="max-width:800px">
+      <img class="mySlides" src="./assets/img/1.jpg" style="width:100%">
+      <img class="mySlides" src="./assets/img/2.jpg" style="width:100%">
+      <img class="mySlides" src="./assets/img/3.jpg" style="width:100%">
+    </div>
+
+    <!-- <div class="w3-center">
+      <div class="w3-section">
+        <button class="w3-button" onclick="plusDivs(-1)">❮ Prev</button>
+        <button class="w3-button" onclick="plusDivs(1)">Next ❯</button>
+      </div>
+    </div> -->
+
+
+  	<!-- Including the JS libraries that we use -->
+  	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  	<!-- Firebase library -->
+  	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+
+  	<!-- Main JavaScript file -->
+  	<script>
+
+    let config = {
+        apiKey: 'AIzaSyBQcCFqXdt_2EvfCOiZQfrRGBHRaUpLlaU',
+        authDomain: 'web-socket-learn.firebaseapp.com',
+        databaseURL: "https://web-socket-learn.firebaseio.com",
+      }
+    firebase.initializeApp(config)
+    let db = firebase.database()
+
+    // Initial open web
+
+    db.ref('slide').on('value', function(data) {
+      showDivs(data.val().val)
+    })
+
+    // function plusDivs(n) {
+    //   showDivs(index += n)
+    //   sendData(index)
+    //   console.log('---',n)
+    // }
+
+    function showDivs(n) {
+      let slides = $('.mySlides')
+      console.log('===',n)
+      console.log('length:', slides.length)
+
+      for (i = 0; i < slides.length; i++) {
+         slides[i].style.display = "none";
+      }
+      slides[n-1].style.display = "block";
+    }
+
+    </script>
+
+  </body>
+</html>

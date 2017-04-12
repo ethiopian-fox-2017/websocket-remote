@@ -1,0 +1,24 @@
+{
+  "name": "websocket-remote",
+  "version": "1.0.0",
+  "description": "Web socket learning project",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrasat/websocket-remote.git"
+  },
+  "author": "Andra Satria <andra.satria1@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrasat/websocket-remote/issues"
+  },
+  "homepage": "https://github.com/andrasat/websocket-remote#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "firebase": "^3.7.6"
+  }
+}
