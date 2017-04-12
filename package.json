@@ -1,0 +1,22 @@
+{
+  "name": "websocket-remote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "listen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wahyuhidayatt/websocket-remote.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wahyuhidayatt/websocket-remote/issues"
+  },
+  "homepage": "https://github.com/Wahyuhidayatt/websocket-remote#readme",
+  "dependencies": {
+    "firebase": "^3.7.6"
+  }
+}

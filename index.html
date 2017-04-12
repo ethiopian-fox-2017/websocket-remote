@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<h2 class="w3-center">Manual Slideshow</h2>
+
+<div class="w3-content w3-display-container">
+  <img class="mySlides" src="1.jpg" style="width:100%">
+  <img class="mySlides" src="2.jpg" style="width:100%">
+  <img class="mySlides" src="3.jpg" style="width:100%">
+
+  <button class="w3-button w3-black w3-display-left" onclick="prev()">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="next()">&#10095;</button>
+</div>
+<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+
+
+<script>
+//process
+var config = {
+  apiKey: "AIzaSyDL7gwHbpAs45UkEPr-GXnvP9LDK8qYo1k",
+  authDomain: "sliders-928db.firebaseapp.com",
+  databaseURL: "https://sliders-928db.firebaseio.com",
+  projectId: "sliders-928db",
+  storageBucket: "sliders-928db.appspot.com",
+  messagingSenderId: "669445366651"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+
+function next() {
+  console.log('next');
+  firebase.database().ref('slide/').set({
+    klik : 'next',
+    timestamp : (new Date().getTime()).toString()
+  })
+}
+
+function prev() {
+  console.log('prev');
+  firebase.database().ref('slide/').set({
+    klik : 'prev',
+    timestamp : (new Date().getTime()).toString()
+  })
+}
+
+//listen
+var starCountRef = firebase.database().ref('slide/');
+starCountRef.on('value', function(snapshot) {
+    if(snapshot.val().klik == 'next') {
+       plusDivs(1)
+     } else {
+       plusDivs(-1)
+     }
+
+});
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+</body>
+</html>
