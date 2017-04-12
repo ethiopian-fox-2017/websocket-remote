@@ -1,0 +1,74 @@
+<!-- bxSlider CSS file -->
+<link href="jquery.bxslider.css" rel="stylesheet" />
+
+<ul class="bxslider">
+  <li id="1" ><img src="images/pic1.jpg" /></li>
+  <li id="2" class="active" onclick="kirim()"><img src="images/pic2.jpg" /></li>
+  <li id="3" onclick="kirim()"><img src="images/pic3.jpg" /></li>
+  <li id="4" onclick="kirim()"><img src="images/pic1.jpg" /></li>
+  <li id="5" onclick="kirim()"><img src="images/pic2.jpg" /></li>
+</ul>
+<div class="outside">
+  <h3>This div is outside of the slider</h3>
+  <p><span id="slider-prev"></span> | <span id="slider-next"></span></p>
+</div>
+
+<!-- jQuery library -->
+<script src="jquery-3.1.1.min.js"></script>
+<!-- bxSlider Javascript file -->
+<script src="jquery.bxslider.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+	$(document).ready(function(){
+
+
+		var slider = $('.bxslider').bxSlider({
+			mode: 'horizontal',
+			moveSlides: 4,
+			slideMargin: 40,
+			infiniteLoop: true,
+			slideWidth: 660,
+			minSlides: 1,
+			maxSlides: 1,
+			speed: 1000,
+      nextSelector: '#slider-next',
+prevSelector: '#slider-prev',
+nextText: 'Onward →',
+prevText: '← Go back'
+		});
+
+    var config = {
+      apiKey: "AIzaSyDgYJodbtY9KR4dRIouspsxU1yxXNPt_-0",
+      authDomain: "simple-storage-211d0.firebaseapp.com",
+      databaseURL: "https://simple-storage-211d0.firebaseio.com",
+      projectId: "simple-storage-211d0",
+      storageBucket: "simple-storage-211d0.appspot.com",
+      messagingSenderId: "857363825383"
+    };
+    firebase.initializeApp(config);
+
+    $( ".bx-pager-item").click(function(){
+        var self = $(this).children().text()
+        firebase.database().ref('movements').set({
+          position : Number(self) - 1
+        });
+    })
+    
+    firebase.database().ref('movements')
+            .on('value', function(snapshot) {
+            slider.goToSlide(snapshot.val().position);
+            console.log(snapshot.val().position);
+
+    });
+
+
+
+
+
+
+
+
+
+
+	});
+</script>
