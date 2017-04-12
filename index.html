@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-content w3-display-container">
+
+<div class="w3-display-container mySlides">
+  <img src="https://newevolutiondesigns.com/images/freebies/cat-wallpaper-1.jpg" style="width:100%">
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="http://snapsort.com/learn/movie-capability/images/1080p-example.jpg" style="width:100%">
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="http://www.pixatu.com/wp-content/uploads/2017/02/backgrounds-lionel-messi-with-full-size-mobile-wallpaper-hd-image-images-for-iphone-898x505.jpg" style="width:100%">
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="https://4.bp.blogspot.com/-u8WBZ4PxatA/VGXOfyAOJoI/AAAAAAABVy4/4SfCdC9xj9s/s1920/Playing%2BCat%2BKitten%2BPet%2BUHD.jpg" style="width:100%">
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="http://wallfic.com/wp-content/uploads/2017/03/beautiful-nature-hd-desktop-wallpaper-high-definition-mobile-on-wallpapers-of-for-full-pics-laptop-.jpg" style="width:100%">
+</div>
+
+<button class="w3-button w3-display-left w3-black" onclick="prev()">&#10094;</button>
+<button class="w3-button w3-display-right w3-black" onclick="next()">&#10095;</button>
+
+</div>
+
+<script src="/js/slide-controller.js" type="text/javascript"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // require('dotenv').config()
+
+  var config = {
+    apiKey: "API_KEY",
+    authDomain: "AUTH_DOMAIN.firebaseapp.com",
+    databaseURL: "https://DATABASE_NAME.firebaseio.com",
+    projectId: "PROJECT_ID",
+    storageBucket: "BUCKET.appspot.com",
+    messagingSenderId: "SENDER_ID"
+  };
+  firebase.initializeApp(config);
+  var starCountRef = firebase.database().ref('slides');
+
+  function next() {
+    firebase.database().ref('slides').set({
+      dir: "next",
+      time: (new Date().getTime()).toString()
+    });
+  }
+
+  function prev() {
+    firebase.database().ref('slides').set({
+      dir: "prev",
+      time: (new Date().getTime()).toString()
+    });
+  }
+
+
+  starCountRef.on('value', function(snapshot) {
+    if (snapshot.val().dir == "next") {
+      plusDivs(1)
+    }else{
+      plusDivs(-1)
+    }
+  });
+
+</script>
+</body>
+</html>
