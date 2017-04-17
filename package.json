@@ -1,0 +1,23 @@
+{
+  "name": "websocket-remote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zidane9/websocket-remote.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zidane9/websocket-remote/issues"
+  },
+  "homepage": "https://github.com/zidane9/websocket-remote#readme",
+  "dependencies": {
+    "firebase": "^3.7.6"
+  }
+}
